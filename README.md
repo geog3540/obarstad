@@ -1,1 +1,1 @@
-# Repository: SEES3540 - Owen Barstad (ASsignment 7)
+# Repository: SEES3540 - Owen Barstad (Assignment 7)
