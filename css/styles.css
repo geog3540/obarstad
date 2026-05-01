@@ -1,13 +1,12 @@
-p {
-background-color: #E6E6FA
-
+<style>
+body {
+    font-family: Calibri, Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.7;
 }
 
-h1 {
-  font-family: Geneva;
-  color: black
+h3 {
+    font-size: 22px;
 }
 
-a:hover{
-  color: purple
-}
+</style>
