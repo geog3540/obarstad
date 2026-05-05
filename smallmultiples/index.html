@@ -81,12 +81,12 @@
 			</div>
 			<br />
 			<div class="row">
-				<div class="col-sm-6">
+				<div class="col-sm-12">
 					<span><p><h3 class='mapTitle'>Households w/o Vehicles</h3>Percentage of households without a vehicle</p></span>
 					<div id="divMap1"></div>
 					<div id="divHist1"></div>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-12">
 					<h3 class='mapTitle'>Children 0-17 years old</h3><p>Percentage of children between 0-17 years old</p>
 					<div id="divMap2"></div>
 					<div id="divHist2"></div>
@@ -94,12 +94,12 @@
 			</div>
 
 			<div class="row">
-				<div class="col-sm-6">
+				<div class="col-sm-12">
 					<h3 class='mapTitle'>Seniors 65+</h3><p>Percentage of Seniors 65+</p>
 					<div id="divMap3"></div>
 					<div id="divHist3"></div>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-12">
 					<h3 class='mapTitle'>Poverty Rate</h3><p>Poverty Rate percentage in tract</p>
 					<div id="divMap4"></div>
 					<div id="divHist4"></div>
@@ -119,12 +119,12 @@
 	var polygonJSONFile = 'data/SFcounty2015.json'
 	// change the projection if needed *d3.geoAlbers()*
 	var projection = d3.geoAlbers();
-	var widthheightRatio = 0.4;
+	var widthheightRatio = 0.6;
 	// Relative placement of legend that ranges between 0 and 1.
 	// 0 is the start, whereas 1 i the end of each panel.
 	// If you want to put the legend on the left, then use 0.
 	// legendY = 0.5 puts the legend in the middle of the Y Axis.
-	var legendX = 0.84, legendY = 0.5
+	var legendX = 0.55, legendY = 0.4
 
 	// id attribute and the name attribute to be used in the tooltip
 	var idAttribute = 'GEOID', nameAttribute = 'GEOID';
@@ -228,9 +228,9 @@
 
 		// Set up the legend dimensions and style
 		var holdLegend = d3.legendColor()
-		.shapeWidth(15)
-		.shapeHeight(5)
-		.shapePadding(10)
+		.shapeWidth(45)
+		.shapeHeight(20)
+		.shapePadding(20)
 		.orient('vertical')
 		.labelFormat(d3.format(att1format))
 		.useClass(false)
@@ -367,6 +367,12 @@
 						panel.select('.legendQuant').call(holdLegend.scale(current_scale));
 
 						// add north arrow
+						panel
+						.append('path')
+						.attr('id', 'arrow')
+						.attr("d", "M 6 0 12 12 6 9 0 12")
+						.attr('fill', "black")
+						.attr("transform", "translate(" + margin.left + "," + margin.top + ") rotate("+ 0 +")");
 						// panel
 						// .append('path')
 						// .attr('id', 'arrow')
