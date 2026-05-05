@@ -39,7 +39,7 @@
 							<li><a href="../shortbio.html">About</a></li>
 							<li><a href="../files/koylu_cv_23.pdf">Resume</a></li>
 							<li class="divider"></li>
-							<li><a href="caglar-koylu@uiowa.edu">Contact</a></li>
+							<li><a href="owen-barstad@uiowa.edu">Contact</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -53,12 +53,12 @@
 	<div class="container">
 		<div class="content">
 			<div class="row">
-					<h1>Cancer in Iowa</h1>
+					<h1>Households w/o a Vehicle in Los Angeles County, CA</h1>
 			</div>
 			<hr />
 			<div class="row">
 				<div class="col-sm-4">
-					<p>Data from <a href="data.iowa.gov">Data.Iowa.gov</a>, maps by Ryan Larson & Caglar Koylu.</p>
+					<p>Data from <a href="data.iowa.gov">Data.Iowa.gov</a>, maps by Owen Barstad</p>
 				</div>
 				<div class='col-sm-8 mapButtons'>
 					<span class="pull-right">
@@ -82,12 +82,12 @@
 			<br />
 			<div class="row">
 				<div class="col-sm-6">
-					<span><p><h3 class='mapTitle'>Lung Cancer</h3>Yearly average number of deaths from lung cancer per 10,000.</p></span>
+					<span><p><h3 class='mapTitle'>Households w/o Vehicles</h3>Percentage of households without a vehicle</p></span>
 					<div id="divMap1"></div>
 					<div id="divHist1"></div>
 				</div>
 				<div class="col-sm-6">
-					<h3 class='mapTitle'>Adult Smokers</h3><p>Percentage of adult population who smoke.</p>
+					<h3 class='mapTitle'>Children 0-17 years old</h3><p>Percentage of children between 0-17 years old</p>
 					<div id="divMap2"></div>
 					<div id="divHist2"></div>
 				</div>
@@ -95,12 +95,12 @@
 
 			<div class="row">
 				<div class="col-sm-6">
-					<h3 class='mapTitle'>Healthcare Cost</h3><p>Average cost of healthcare.</p>
+					<h3 class='mapTitle'>Seniors 65+</h3><p>Percentage of Seniors 65+</p>
 					<div id="divMap3"></div>
 					<div id="divHist3"></div>
 				</div>
 				<div class="col-sm-6">
-					<h3 class='mapTitle'>Senior Citizens</h3><p>Percentage of population above 65 years old.</p>
+					<h3 class='mapTitle'>Poverty Rate</h3><p>Poverty Rate percentage in tract</p>
 					<div id="divMap4"></div>
 					<div id="divHist4"></div>
 				</div>
@@ -116,7 +116,7 @@
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////
 	// TODO: Change the variables below to customize the small multiples interface for your data
-	var polygonJSONFile = 'data/out.geojson'
+	var polygonJSONFile = 'data/SFcounty2015.json'
 	// change the projection if needed *d3.geoAlbers()*
 	var projection = d3.geoAlbers();
 	var widthheightRatio = 0.4;
@@ -127,10 +127,10 @@
 	var legendX = 0.84, legendY = 0.5
 
 	// id attribute and the name attribute to be used in the tooltip
-	var idAttribute = 'FIPS', nameAttribute = 'County';
+	var idAttribute = 'GEOID', nameAttribute = 'GEOID';
 
 	// Find the abbreviations of color names from https://colorbrewer2.org/
-	var colors =  colorbrewer.YlOrBr;
+	var colors =  colorbrewer.PuBuGn;
 
 	// Chart/map attributes (variables) and formats based on the divs defined above
 	// For attribute 1 (the same for all others), see the description of the parameters below.
@@ -139,22 +139,22 @@
 	// att1format: enter the d3.format string to display the variables in the format you like
 	// Check this link on how to specify the desired format:
 	// https://observablehq.com/@d3/d3-format
-	var att1 = 'lungDeathPerYear', att1alias = 'Lung Cancer Death Density per 10,000', att1format = '.0f',
-	att2 = 'pctSmokers', att2alias =  '% Smokers', att2format = '.0f',
-	att3 = 'healthCosts', att3alias = '$ Spent', att3format = '.0f',
-	att4 = 'numSr', att4alias = '% 65+', att4format = '.0f';
+	var att1 = 'FoodAccessSF2015_TractHUNV', att1alias = 'Total Count of Housing Units w/o Vehicle', att1format = '.0f',
+	att2 = 'FoodAccessSF2015_TractSeniors', att2alias =  'Total count of Seniors Age 65+', att2format = '.0f',
+	att3 = 'FoodAccessSF2015_TractKids', att3alias = 'Total count of kids 0-17 in Tract', att3format = '.0f',
+	att4 = 'FoodAccessSF2015_PovertyRate', att4alias = 'Share of tract pop. living w/ income @ or below feeral poverty line thresholds for family size', att4format = '.0f';
 
   // enter below all variables that should be recalculated. The order of attributes should match with
 	// the list of multiply and divide by values
-  var attributesToBeNormalized = [att1, att4];
+  var attributesToBeNormalized = [att1, att2, attr3];
 	// If you would like to multiple the variables
 	// with a constant value enter them in multiplyBy array. If there is no need for multiplication,
 	// simply enter 1 for each value in multiplyBy.
-	var multiplyBy = [10000, 100];
+	var multiplyBy = [100, 100, 100];
 	// Enter the attribute name that you want to normalize (divide by).
 	// If you want to only multiply an attribute but not divide by another attribute
 	// then simply put null as the attribute name in the same order of the attribute.
-	var divideBy = ['Population', 'Population'];
+	var divideBy = ['FoodAccessSF2015_OHU2010', 'FoodAccessSF2015_POP2010', 'FoodAccessSF2015_POP2010'];
 	// if your variables are not raw counts and they are already normalized, comment out above, and
 	//uncomment below:
 	// var attributesToBeNormalized = [];
