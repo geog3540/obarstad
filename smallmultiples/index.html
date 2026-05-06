@@ -52,12 +52,12 @@
 	<div class="container">
 		<div class="content">
 			<div class="row">
-					<h1>Households w/o a Vehicle in San Francisco County, CA</h1>
+					<h1> Vehicle Ownership in comparison to Age/Income Demographics in San Francisco County, CA</h1>
 			</div>
 			<hr />
 			<div class="row">
 				<div class="col-sm-4">
-					<p>Data from <a href="data.iowa.gov">Data.Iowa.gov</a>, maps by Owen Barstad</p>
+					<p>Data from <a href="https://www.ers.usda.gov/data-products/food-access-research-atlas">USDA.gov</a>, Maps by Owen Barstad</p>
 				</div>
 				<div class='col-sm-8 mapButtons'>
 					<span class="pull-right">
@@ -81,12 +81,12 @@
 			<br />
 			<div class="row">
 				<div class="col-sm-6">
-					<span><p><h3 class='mapTitle'>Households w/o Vehicles</h3>Percentage of households without a vehicle</p></span>
+					<span><p><h3 class='mapTitle'>Households Without a Vehicle</h3>Percentage of Households Without a Vehicle</p></span>
 					<div id="divMap1"></div>
 					<div id="divHist1"></div>
 				</div>
 				<div class="col-sm-6">
-					<h3 class='mapTitle'>Children 0-17 years old</h3><p>Percentage of children between 0-17 years old</p>
+					<h3 class='mapTitle'>Seniors 65+</h3><p>Percentage of Seniors age 65+</p>
 					<div id="divMap2"></div>
 					<div id="divHist2"></div>
 				</div>
@@ -94,12 +94,12 @@
 
 			<div class="row">
 				<div class="col-sm-6">
-					<h3 class='mapTitle'>Seniors 65+</h3><p>Percentage of Seniors 65+</p>
+					<h3 class='mapTitle'>Children ages 0-17</h3><p>Percentage of Children age 0-17</p>
 					<div id="divMap3"></div>
 					<div id="divHist3"></div>
 				</div>
 				<div class="col-sm-6">
-					<h3 class='mapTitle'>Poverty Rate</h3><p>Poverty Rate percentage in tract</p>
+					<h3 class='mapTitle'>Poverty Rate</h3><p>Poverty Rate Percentage</p>
 					<div id="divMap4"></div>
 					<div id="divHist4"></div>
 				</div>
@@ -115,15 +115,15 @@
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////
 	// TODO: Change the variables below to customize the small multiples interface for your data
-	var polygonJSONFile = 'data/SFcounty2015.json'
+	var polygonJSONFile = 'data/SFcounty2015_again.json'
 	// change the projection if needed *d3.geoAlbers()*
 	var projection = d3.geoAlbers();
-	var widthheightRatio = 0.6;
+	var widthheightRatio = 0.5;
 	// Relative placement of legend that ranges between 0 and 1.
 	// 0 is the start, whereas 1 i the end of each panel.
 	// If you want to put the legend on the left, then use 0.
 	// legendY = 0.5 puts the legend in the middle of the Y Axis.
-	var legendX = 0.4, legendY = 0.4
+	var legendX = 0, legendY = 0.4
 
 	// id attribute and the name attribute to be used in the tooltip
 	var idAttribute = 'GEOID', nameAttribute = 'GEOID';
@@ -138,10 +138,10 @@
 	// att1format: enter the d3.format string to display the variables in the format you like
 	// Check this link on how to specify the desired format:
 	// https://observablehq.com/@d3/d3-format
-	var att1 = 'FoodAccessSF2015_TractHUNV', att1alias = 'Total Count of Housing Units w/o Vehicle', att1format = '.0f',
-	att2 = 'FoodAccessSF2015_TractSeniors', att2alias =  'Total count of Seniors Age 65+', att2format = '.0f',
-	att3 = 'FoodAccessSF2015_TractKids', att3alias = 'Total count of kids 0-17 in Tract', att3format = '.0f',
-	att4 = 'FoodAccessSF2015_PovertyRate', att4alias = 'Share of tract pop. living w/ income @ or below feeral poverty line thresholds for family size', att4format = '.0f';
+	var att1 = 'FoodAccessSF2015_TractHUNV', att1alias = '% of Housing Units w/o a Vehicle', att1format = '.0f',
+	att2 = 'FoodAccessSF2015_TractSeniors', att2alias =  '% of Seniors Age 65+', att2format = '.0f',
+	att3 = 'FoodAccessSF2015_TractKids', att3alias = '% of kids age 0-17', att3format = '.0f',
+	att4 = 'FoodAccessSF2015_PovertyRate', att4alias = '% Pop. with income at or below federal poverty line', att4format = '.0f';
 
   // enter below all variables that should be recalculated. The order of attributes should match with
 	// the list of multiply and divide by values
@@ -260,7 +260,7 @@
 					if(buttonid == "ckmButton"){
 						$(".container").fadeOut(200);
 						functionAlert("Maps cannot be compared visually when natural breaks classification is selected. " +
-					  "Because natural breaks focuses on the recise distribution of each attribute along the number line.");
+					  "Because natural breaks focuses on the precise distribution of each attribute along the number line.");
 					}else if(buttonid == "eqIntButton"){
 						$(".container").fadeOut(200);
 						functionAlert("When equal interval classification is selected, all maps should be"
